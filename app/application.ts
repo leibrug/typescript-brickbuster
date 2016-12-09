@@ -236,11 +236,19 @@ class Paddle extends Sprite {
 }
 
 class Brick extends Sprite {
-
+    hit(): void {
+        this.hide();
+    }
 }
 
 class HardBrick extends Brick {
+    health: number = 1;
 
+    hit(): void {
+        if (this.health-- <= 0) {
+            this.hide();
+        }
+    }
 }
 
 enum GameState {
@@ -379,7 +387,7 @@ class Game {
                 }
 
                 if (wasHit) {
-                    brick.hide();
+                    brick.hit();
                     this.score += 20;
                     this.scoreLabel.innerText = '' + this.score;
                     break;
