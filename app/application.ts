@@ -239,6 +239,10 @@ class Brick extends Sprite {
 
 }
 
+class HardBrick extends Brick {
+
+}
+
 enum GameState {
     Running,
     GameOver
@@ -277,7 +281,12 @@ class Game {
         );
 
         for (let i = 0; i < bricks.length; i++) {
-            this.bricks.push(new Brick(<HTMLElement>bricks[i]));
+            if (bricks[i].classList.contains('hard')) {
+                this.bricks.push(new HardBrick(<HTMLElement>bricks[i]));
+            }
+            else {
+                this.bricks.push(new Brick(<HTMLElement>bricks[i]));
+            }
         }
 
         this.createWalls(this.ball.radius, boardElement.offsetWidth, boardElement.offsetHeight);
